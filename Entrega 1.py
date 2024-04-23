@@ -51,30 +51,29 @@ def login_usuario(base_datos):
 # Función principal
 def main():
     base_datos = {}
-    while True:
-        print("\nBienvenido al sistema de gestión de usuarios:")
-        print("1. Registrar un nuevo usuario")
-        print("2. Mostrar usuarios registrados")
-        print("3. Iniciar sesión")
-        print("4. Salir")
-        opcion = input("Seleccione una opción ingresando el número correspondiente: ")
-        
-        # Validar entrada del usuario
-        if not opcion.isdigit():
-            print("Por favor, ingrese un número.")
-            continue
+    is_running = True
 
-        opcion = int(opcion)
-        if opcion < 1 or opcion > 4:
-            print("Opción no válida. Por favor, seleccione una opción válida.")
-            continue
-
-        try:
-            opcion = int(opcion)
-        except ValueError:
-            print("Por favor, ingrese un número válido.")
-            continue
-        
+    while is_running:
+        is_wrong_answer = True
+        while is_wrong_answer:
+            print("\nBienvenido al sistema de gestión de usuarios:")
+            print("1. Registrar un nuevo usuario")
+            print("2. Mostrar usuarios registrados")
+            print("3. Iniciar sesión")
+            print("4. Salir")
+            opcion = input("Seleccione una opción ingresando el número correspondiente: ")
+            
+            # Validar entrada del usuario
+            try:
+                opcion = int(opcion) 
+                if opcion < 1 or opcion > 4:
+                    print("Opción no válida. Por favor, seleccione una opción válida.")
+                else:
+                    is_wrong_answer = False
+            except ValueError:
+                print("Por favor, ingrese un número válido.")
+                           
+                  
         if opcion == 1:
             print("\n*** Registro de nuevo usuario ***")
             registrar_usuario(base_datos)
@@ -86,7 +85,7 @@ def main():
             login_usuario(base_datos)
         elif opcion == 4:
             print("\nSaliendo del programa...")
-            break
+            is_running = False
         else:
             print("Opción no válida. Por favor, seleccione una opción válida.")
 
